@@ -1,3 +1,4 @@
 {
-	"/": ["get"]
+	"/": ["get"],
+    "/weekly-announcement-email": ["get"]
 }
