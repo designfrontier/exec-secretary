@@ -2,11 +2,15 @@
 const events = require('monument').events;
 
 events.on('route:/weekly-announcement-email:get', (connection) => {
-    events.once('data:set:leaders', (leaders) => {
-        console.log(leaders);
-        events.emit('send:weekly:announcments', leaders);
-        connection.res.send('weekly announcments email sent');
-    });
+    if (connection.query.token && connection.query.token === 'tobeornototobethatisthequestion'){
+        events.once('data:set:leaders', (leaders) => {
+            console.log(leaders);
+            events.emit('send:weekly:announcments', leaders);
+            connection.res.send('weekly announcments email sent');
+        });
 
-    events.emit('data:get:leaders');
+        events.emit('data:get:leaders');
+    } else {
+        events.emit('error:401', connection);
+    }
 });
