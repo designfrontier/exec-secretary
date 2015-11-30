@@ -91,7 +91,7 @@ const events = require('monument').events
 
                 fetchingStore['data.leaders'] = false;
                 events.emit(`data:set:leaders:${id}`, leaderData.find((item) => {
-                    return item.id === id;
+                    return item.id === id.toString();
                 }));
                 cache.add('data.leaders', leaderData, 300000);
             });

@@ -8,12 +8,12 @@ require('./leaders.js');
 
 describe('leaders Collection tests', () => {
     it('should respond to data:get:leaders passed an id', (done) => {
-        events.once('data:set:leaders:123', (data) => {
+        events.once('data:set:leaders:1', (data) => {
             assert.isObject(data);
             done();
         });
 
-        events.emit('data:get:leaders', 123);
+        events.emit('data:get:leaders', 1);
     });
 
     it('should respond to data:get:leaders with no id', (done) => {

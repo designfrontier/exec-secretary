@@ -12,9 +12,27 @@ describe('/weekly-announcement-email route file tests', () => {
         fakeConnection.reset();
     });
 
-    it('should respond to route:/weekly-announcement-email:get', () => {
+    it('should not respond to route:/weekly-announcement-email:get if no token', () => {
         events.emit('route:/weekly-announcement-email:get', fakeConnection);
 
-        assert.strictEqual(fakeConnection.out().response, 'route /weekly-announcement-email now responding to get requests');
+        assert.include(fakeConnection.out().response, 'Punk.');
+    });
+
+    it('should respond to route:/weekly-announcement-email:get if token', (done) => {
+        fakeConnection.query.token = 'tobeornototobethatisthequestion';
+
+        events.on('send:weekly:announcments', (leaders) => {
+            assert.isArray(leaders);
+
+
+            done();
+        });
+
+        events.on('data:get:leaders', () => {
+            events.emit('data:set:leaders', [ { name: 'daniel' } ]);
+        });
+
+        events.emit('route:/weekly-announcement-email:get', fakeConnection);
+        assert.include(fakeConnection.out().response, 'sent');
     });
 });

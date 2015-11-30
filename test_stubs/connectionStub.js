@@ -32,6 +32,7 @@ module.exports = {
               headers = headersIn;
           }
     }
+    , query: {}
     , reset: () => {
           headers = {};
           status = 200;
