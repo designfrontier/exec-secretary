@@ -7,7 +7,7 @@
     "dot": "^1.0.3",
     "monument": "^2.1.0-rc.3",
     "node-cached": "^1.0.0",
-    "sendgrid": "^2.0.0"
+    "sendgrid": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
